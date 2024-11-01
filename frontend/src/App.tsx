@@ -1,11 +1,29 @@
 import "./App.css";
-import { Button } from "./components/ui/button";
+import Login from "./auth/Login";
+import {
+  createBrowserRouter,
+  createRoutesFromElements,
+  Route,
+  RouterProvider,
+} from "react-router-dom";
+import Register from "./auth/Register";
 
+const appRouter = createBrowserRouter(
+  createRoutesFromElements(
+    // <Route path="/" element={<Layout />}>
+    //   <Route path="/login" element={<Login />} />
+    //   <Route path="/signup" element={<Register />} />
+    // </Route>
+    <>
+      <Route path="/login" element={<Login />} />
+      <Route path="/signup" element={<Register />} /></>
+  
+  )
+);
 function App() {
   return (
-    <>
-      <Button className="bg-orange hover:bg-hoverOrange">Click me</Button>
-    </>
+    <RouterProvider router={appRouter}>
+    </RouterProvider>
   );
 }
 
