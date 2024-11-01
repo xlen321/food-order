@@ -18,7 +18,7 @@ import { z } from "zod";
 
 export default function Login() {
   const [loading, setLoading] = useState<boolean>(false);
-  const [error, setError] = useState<string | null >(null);
+  const [error, setError] = useState<string | null>(null);
   const form = useForm<z.infer<typeof loginSchema>>({
     resolver: zodResolver(loginSchema),
     defaultValues: {
@@ -28,8 +28,16 @@ export default function Login() {
   });
 
   const onSubmit = async (values: z.infer<typeof loginSchema>) => {
-    console.log(values);
-    
+    setLoading(true);
+    setError(null);
+    try {
+      console.log(values);
+      form.reset();
+    } catch (error) {
+      setError(`Error: ${error}`);
+    } finally {
+      setLoading(false);
+    }
   };
   return (
     <div className="flex items-center justify-center">
@@ -40,7 +48,7 @@ export default function Login() {
         >
           <div className="mb-2 text-center">
             <h1 className="font-extrabold text-3xl text-gray-800">
-              Welcome Back to Eats
+              Welcome to SureEats
             </h1>
             <p className="text-gray-500 mt-3 text-lg">
               Sign in to your account
